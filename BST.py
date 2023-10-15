@@ -126,6 +126,21 @@ class BST:
                 self.traverse_tree(curr_node)
                 self.nodes.remove(remove_value)
                 self.contents.remove(remove_value)
+
+                if curr_node is prev_node.right:
+                    prev_node.right = None
+                else:
+                    prev_node.left = None
+
+                for node_value in self.nodes:
+                    self.add(node_value)
+        elif remove_value > curr_node.data:
+            self.remove_node(curr_node.right, remove_value, prev_node=curr_node)
+        elif remove_value < curr_node.data:
+            self.remove_node(curr_node.left, remove_value, prev_node=curr_node)
+
+
+
                 
         
     def traverse_tree(self, node):
@@ -133,6 +148,8 @@ class BST:
             self.traverse_tree(node.right)
             self.nodes.append(node.data)
             self.traverse_tree(node.left)
+
+            
             
        
 
@@ -175,3 +192,6 @@ bst_0.add(node_7)
 bst_0.add(node_13)
 
 print(bst_0)
+
+print('################################')
+
